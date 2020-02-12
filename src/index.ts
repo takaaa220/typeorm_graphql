@@ -34,10 +34,7 @@ const main = async () => {
       addUser: async (_parent, args, { connection }, _info) => {
         const repository = connection.getRepository(User);
 
-        const newUser = new User();
-        newUser.lastName = args.lastName;
-        newUser.firstName = args.firstName;
-        newUser.age = args.age;
+        const newUser = repository.create(args);
 
         const user = await repository.save(newUser);
         return user || null;
