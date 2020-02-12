@@ -1,7 +1,13 @@
-# Awesome Project Build with TypeORM
+# TypeORM + Apollo Server + GraphQL code generator
 
-Steps to run this project:
+## 実行
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+1. yarn install
+2. docker-compose up -d
+3. yarn dev
+
+## コード生成
+
+```
+$ yarn graphql-codegen --config codegen.yaml
+```
