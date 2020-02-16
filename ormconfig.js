@@ -2,8 +2,9 @@ const TypeOrmNamingStrategy = require("./src/config/TypeOrmNamingStrategy.ts");
 
 module.exports = {
   type: "mysql",
-  host: process.env.DATABASE_HOST || "127.0.0.1",
-  port: process.env.DATABASE_PORT || 3103,
+  extra: {
+    socketPath: process.env.DATABASE_SOCKET || "/tmp/mysql.sock",
+  },
   username: process.env.DATABASE_USER || "root",
   password: process.env.DATABASE_PASSWORD || "password",
   database: process.env.DATABASE_NAME || "typeorm",

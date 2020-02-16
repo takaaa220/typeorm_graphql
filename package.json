@@ -16,7 +16,7 @@
     "typescript": "3.3.3333"
   },
   "dependencies": {
-    "apollo-server": "^2.10.0",
+    "apollo-server-express": "^2.10.1",
     "graphql": "^14.6.0",
     "graphql-import": "^1.0.0-beta.2",
     "mysql": "^2.14.1",
@@ -26,7 +26,7 @@
     "typeorm": "0.2.22"
   },
   "scripts": {
-    "start": "ts-node ./src/index.ts",
+    "start:production": "ts-node ./node_modules/typeorm/cli.js migration:run && ts-node ./src/index.ts",
     "dev": "nodemon -w src --ext ts --exec ts-node src/index.ts",
     "migrate:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate",
     "migrate:run": "ts-node ./node_modules/typeorm/cli.js migration:run",

@@ -4,5 +4,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn --production
 
+EXPOSE 8080
+
 COPY . .
-CMD ["yarn", "start"]
+CMD ["yarn", "start:production"]

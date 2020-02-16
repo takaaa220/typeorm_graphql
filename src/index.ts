@@ -1,5 +1,6 @@
 import "reflect-metadata";
-import { ApolloServer } from "apollo-server";
+import * as express from "express";
+import { ApolloServer } from "apollo-server-express";
 import { createConnection, Connection } from "typeorm";
 import { importSchema } from "graphql-import";
 import {
@@ -106,9 +107,17 @@ const main = async () => {
       },
     });
 
-    server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
-      console.log(`🚀 Server ready at ${url}`);
-    });
+    const app = express();
+    app.use(express.json());
+
+    server.applyMiddleware({ app });
+
+    const port = process.env.PORT || 5000;
+    app.listen({ port }, () =>
+      console.log(
+        `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
+      )
+    );
   } catch (e) {
     console.error(e);
   }
