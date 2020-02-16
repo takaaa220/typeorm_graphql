@@ -48,6 +48,7 @@ export type Post = {
   title: Scalars['String'],
   content: Scalars['String'],
   user: User,
+  tags?: Maybe<Array<Tag>>,
 };
 
 export type Query = {
@@ -66,6 +67,13 @@ export type QueryUserArgs = {
 
 export type QueryPostArgs = {
   id: Scalars['Int']
+};
+
+export type Tag = {
+   __typename?: 'Tag',
+  id: Scalars['Int'],
+  name: Scalars['String'],
+  posts?: Maybe<Array<Post>>,
 };
 
 export type User = {
@@ -155,6 +163,7 @@ export type ResolversTypes = {
   User: ResolverTypeWrapper<User>,
   String: ResolverTypeWrapper<Scalars['String']>,
   Post: ResolverTypeWrapper<Post>,
+  Tag: ResolverTypeWrapper<Tag>,
   Mutation: ResolverTypeWrapper<{}>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
 };
@@ -166,6 +175,7 @@ export type ResolversParentTypes = {
   User: User,
   String: Scalars['String'],
   Post: Post,
+  Tag: Tag,
   Mutation: {},
   Boolean: Scalars['Boolean'],
 };
@@ -182,6 +192,7 @@ export type PostResolvers<ContextType = any, ParentType extends ResolversParentT
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   content?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
+  tags?: Resolver<Maybe<Array<ResolversTypes['Tag']>>, ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
 
@@ -190,6 +201,13 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   users?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType>,
   post?: Resolver<Maybe<ResolversTypes['Post']>, ParentType, ContextType, RequireFields<QueryPostArgs, 'id'>>,
   posts?: Resolver<Maybe<Array<ResolversTypes['Post']>>, ParentType, ContextType>,
+};
+
+export type TagResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tag'] = ResolversParentTypes['Tag']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  posts?: Resolver<Maybe<Array<ResolversTypes['Post']>>, ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -205,6 +223,7 @@ export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>,
   Post?: PostResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
+  Tag?: TagResolvers<ContextType>,
   User?: UserResolvers<ContextType>,
 };
 

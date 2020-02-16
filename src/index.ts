@@ -22,28 +22,28 @@ const main = async () => {
       user: async (_parent, { id }, { connection }, _info) => {
         const user = await connection
           .getRepository(User)
-          .findOne(id, { relations: ["posts "] });
+          .findOne(id, { relations: ["posts", "posts.tags"] });
 
         return user || null;
       },
       users: async (_parent, _args, { connection }, _info) => {
         const users = await connection
           .getRepository(User)
-          .find({ relations: ["posts"] });
+          .find({ relations: ["posts", "posts.tags"] });
 
         return users || [];
       },
       post: async (_parent, { id }, { connection }, _info) => {
         const post = await connection
           .getRepository(Post)
-          .findOne(id, { relations: ["user"] });
+          .findOne(id, { relations: ["user", "tags"] });
 
         return post;
       },
       posts: async (_parent, _args, { connection }, _info) => {
         const posts = await connection
           .getRepository(Post)
-          .find({ relations: ["user"] });
+          .find({ relations: ["user", "tags"] });
 
         return posts || [];
       },

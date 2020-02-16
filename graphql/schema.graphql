@@ -25,4 +25,11 @@ type Post {
   title: String!
   content: String!
   user: User!
+  tags: [Tag!]
+}
+
+type Tag {
+  id: Int!
+  name: String!
+  posts: [Post!]
 }
