@@ -8,6 +8,7 @@ import {
   Resolvers,
 } from "./generated/graphql_types";
 import { User } from "./entity/User";
+import { Post } from "./entity/Post";
 
 type Context = {
   connection: Connection;
@@ -19,14 +20,32 @@ const main = async () => {
 
     const Query: QueryResolvers<Context> = {
       user: async (_parent, { id }, { connection }, _info) => {
-        const user = await connection.getRepository(User).findOne({ id });
+        const user = await connection
+          .getRepository(User)
+          .findOne(id, { relations: ["posts "] });
 
         return user || null;
       },
       users: async (_parent, _args, { connection }, _info) => {
-        const users = await connection.getRepository(User).find();
+        const users = await connection
+          .getRepository(User)
+          .find({ relations: ["posts"] });
 
         return users || [];
+      },
+      post: async (_parent, { id }, { connection }, _info) => {
+        const post = await connection
+          .getRepository(Post)
+          .findOne(id, { relations: ["user"] });
+
+        return post;
+      },
+      posts: async (_parent, _args, { connection }, _info) => {
+        const posts = await connection
+          .getRepository(Post)
+          .find({ relations: ["user"] });
+
+        return posts || [];
       },
     };
 

@@ -1,6 +1,8 @@
 type Query {
   user(id: Int!): User
   users: [User!]
+  post(id: Int!): Post
+  posts: [Post!]
 }
 
 type Mutation {
@@ -13,4 +15,12 @@ type User {
   firstName: String!
   lastName: String!
   age: Int!
+  posts: [Post!]
+}
+
+type Post {
+  id: Int!
+  title: String!
+  content: String!
+  user: User!
 }
