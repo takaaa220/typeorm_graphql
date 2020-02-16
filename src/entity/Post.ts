@@ -14,7 +14,10 @@ export class Post {
 
   @ManyToOne(
     _type => User,
-    user => user.posts
+    user => user.posts,
+    {
+      nullable: false,
+    }
   )
   user: User;
 }

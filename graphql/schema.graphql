@@ -8,6 +8,8 @@ type Query {
 type Mutation {
   addUser(lastName: String!, firstName: String!, age: Int!): User!
   deleteUser(id: Int!): User!
+  addPost(title: String!, content: String!, userID: Int!): Post!
+  deletePost(id: Int!): Post!
 }
 
 type User {

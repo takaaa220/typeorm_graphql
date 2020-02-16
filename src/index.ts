@@ -66,6 +66,30 @@ const main = async () => {
 
         return user;
       },
+      addPost: async (_parent, _args, { connection }, _info) => {
+        const { userID, ...args } = _args;
+
+        const user = await connection.getRepository(User).findOne(userID);
+
+        if (!user) throw new Error("User not found! Please confirm an userID");
+
+        const repository = await connection.getRepository(Post);
+
+        const newPost = repository.create(args);
+        newPost.user = user;
+
+        const post = await repository.save(newPost);
+
+        return post;
+      },
+      deletePost: async (_parent, { id }, { connection }, _info) => {
+        const repository = await connection.getRepository(Post);
+
+        const post = await repository.findOne(id);
+        await repository.delete(post);
+
+        return post;
+      },
     };
 
     const typeDefs = await importSchema("graphql/schema.graphql");

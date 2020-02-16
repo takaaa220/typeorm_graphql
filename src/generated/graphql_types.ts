@@ -14,6 +14,8 @@ export type Mutation = {
    __typename?: 'Mutation',
   addUser: User,
   deleteUser: User,
+  addPost: Post,
+  deletePost: Post,
 };
 
 
@@ -25,6 +27,18 @@ export type MutationAddUserArgs = {
 
 
 export type MutationDeleteUserArgs = {
+  id: Scalars['Int']
+};
+
+
+export type MutationAddPostArgs = {
+  title: Scalars['String'],
+  content: Scalars['String'],
+  userID: Scalars['Int']
+};
+
+
+export type MutationDeletePostArgs = {
   id: Scalars['Int']
 };
 
@@ -159,6 +173,8 @@ export type ResolversParentTypes = {
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationAddUserArgs, 'lastName' | 'firstName' | 'age'>>,
   deleteUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>,
+  addPost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationAddPostArgs, 'title' | 'content' | 'userID'>>,
+  deletePost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationDeletePostArgs, 'id'>>,
 };
 
 export type PostResolvers<ContextType = any, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = {
