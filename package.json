@@ -21,10 +21,14 @@
     "graphql": "^14.6.0",
     "graphql-import": "^1.0.0-beta.2",
     "mysql": "^2.14.1",
+    "pluralize": "^8.0.0",
     "reflect-metadata": "^0.1.10",
     "typeorm": "0.2.22"
   },
   "scripts": {
-    "dev": "nodemon -w src --ext ts --exec ts-node src/index.ts"
+    "dev": "nodemon -w src --ext ts --exec ts-node src/index.ts",
+    "migrate:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate",
+    "migrate:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "migrate:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert"
   }
 }
