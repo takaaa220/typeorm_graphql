@@ -23,7 +23,7 @@
     "pluralize": "^8.0.0",
     "reflect-metadata": "^0.1.10",
     "ts-node": "^8.6.2",
-    "typeorm": "0.2.22"
+    "typeorm": "0.2.25"
   },
   "scripts": {
     "start:production": "ts-node ./node_modules/typeorm/cli.js migration:run && ts-node ./src/index.ts",
